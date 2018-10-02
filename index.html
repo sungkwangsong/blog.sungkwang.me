@@ -17,7 +17,7 @@ layout: default
 
           <div class="post-author-info">
             {% if post.author-email %}
-              <img class="portrait" src="{{base_path}}/images/profile/{{post.author-email}}.png" />
+              <!-- <img class="portrait" src="{{base_path}}/images/profile/{{post.author-email}}.png" /> -->
               <h2 class="post-title"><a href="{{ base_path }}{{ post.url }}"><span class="post-title-words">{{ post.title }}</span></a></h2>
               <p class="post-description">{{ post.description }}</p>
               <span class="post-date">{{ post.date | date: "%Y년 %m월 %d일" }}</span>
