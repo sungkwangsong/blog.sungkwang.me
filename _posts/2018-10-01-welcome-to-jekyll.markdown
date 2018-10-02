@@ -3,7 +3,7 @@ layout: entry
 title:  "Welcome to Jekyll!"
 date:   2018-10-01 04:22:46 +0900
 # categories: jekyll 
-author: JC Kim
+author: 송성광
 author-email: tech@sungkwang.me
 description: 블로그 오픈
 publish: true
