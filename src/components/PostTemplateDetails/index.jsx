@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import moment from 'moment'
 import Disqus from '../Disqus/Disqus'
 import './style.scss'
+import SEO from '../SEO/SEO'
 
 class PostTemplateDetails extends React.Component {
   render() {
@@ -46,6 +47,17 @@ class PostTemplateDetails extends React.Component {
 
     return (
       <div>
+        
+          <SEO
+            title={post.frontmatter.title}
+            desc={post.frontmatter.description || post.excerpt || 'nothin’'}
+            // image={post.frontmatter.image.childImageSharp.sizes.src}
+            banner={post.frontmatter.image || ''}
+            pathname={post.fields.slug}
+            article
+            post
+          />
+
         {homeBlock}
         <div className="post-single">
           <div className="post-single__inner">

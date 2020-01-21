@@ -53,6 +53,7 @@ export const pageQuery = graphql`
           github
           rss
           facebook
+          facebookAppID
         }
       }
     }

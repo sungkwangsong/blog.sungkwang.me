@@ -8,6 +8,7 @@ category: "Story"
 tags:
   - "Story"
 description: "앞이 보이지 않는 동굴 속에서 길을 찾는 방법은 다른 사람이 날 찾을 수 있게 소리를 치는 일이 전부이다. 만약 손에 향유 기름을 가지고 있다면 촛대의 불을 밝혀서 준비할 수 있다."
+image: https://unsplash.com/photos/3MPT9dMR0G0
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KJ2Mgl6np04" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="min-width:100%"></iframe>
