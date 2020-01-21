@@ -3,7 +3,7 @@ title: 긴 시간은 끝났다
 date: "2020-01-20T01:51:00.000Z"
 layout: post
 draft: false
-path: "/posts/2020/01/21/start-a-new-blog"
+path: "/articles/2020/01/21/start-a-new-blog"
 category: "Story"
 tags:
   - "Story"
