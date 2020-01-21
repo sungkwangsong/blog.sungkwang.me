@@ -7,7 +7,7 @@ path: "/articles/2020/01/21/start-a-new-blog/"
 category: "Story"
 tags:
   - "Story"
-description: "앞이 보이지 않는 동굴 속에서 길을 찾는 방법은 다른 사람이 날 찾을 수 있게 소리를 치는 일이 전부이다. 만약 손에 향유 기름을 가지고 있다면 촛대의 불을 밝혀서 준비할 수 있다."
+description: "앞이 보이지 않는 동굴 속에서 길을 찾는 방법은 다른 사람이 날 찾을 수 있게 소리를 치는 일이 전부이다. 만약 손에 불을 밝힐 기름을 가지고 있다면 촛대의 불을 밝혀서 준비할 수 있다."
 image: https://hbn-assets-blog.s3.amazonaws.com/sungkwang/images/photo-1512944869056-136acc1d2e5f.jpeg
 ---
 
