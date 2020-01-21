@@ -163,7 +163,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
         <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
       </Helmet>
       <Facebook
-        desc={seo.description}
+        description={seo.description}
         image={seo.image}
         title={seo.title}
         type={article ? 'article' : 'website'}
