@@ -47,7 +47,6 @@ class PostTemplateDetails extends React.Component {
 
     return (
       <div>
-        
           <SEO
             title={post.frontmatter.title}
             desc={post.frontmatter.description || post.excerpt || 'nothin’'}
