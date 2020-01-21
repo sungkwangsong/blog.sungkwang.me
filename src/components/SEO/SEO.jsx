@@ -152,7 +152,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
 
   return (
     <>
-      <Helmet title={seo.title}>
+      <Helmet title={`${seo.title} - ${defaultTitle}`}>
         <html lang={siteLanguage} />
         <meta name="description" content={seo.description} />
         <meta name="image" content={seo.image} />
