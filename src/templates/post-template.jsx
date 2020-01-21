@@ -31,6 +31,7 @@ export const pageQuery = graphql`
   query PostBySlug($slug: String!) {
     site {
       siteMetadata {
+        siteUrl
         title
         subtitle
         copyright
@@ -50,6 +51,7 @@ export const pageQuery = graphql`
         slug
       }
       frontmatter {
+        path
         title
         tags
         date

@@ -6,7 +6,7 @@ import './style.scss'
 
 class PostTemplateDetails extends React.Component {
   render() {
-    const { subtitle, author } = this.props.data.site.siteMetadata
+    const { subtitle, author, siteUrl } = this.props.data.site.siteMetadata
     const post = this.props.data.markdownRemark
     const tags = post.fields.tagSlugs
 
@@ -42,6 +42,8 @@ class PostTemplateDetails extends React.Component {
       </div>
     )
 
+    const commentsQueryUrl = encodeURIComponent(`${siteUrl}${post.frontmatter.path}`)
+
     return (
       <div>
         {homeBlock}
@@ -63,14 +65,22 @@ class PostTemplateDetails extends React.Component {
             {tagsBlock}
             <hr />
             <p className="post-single__footer-text">
-              {subtitle}
+              {/* {subtitle} */}
               <a
+                href={`https://twitter.com/search?q=${commentsQueryUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <br /> Discuss on Twitter
+              </a>
+
+              {/* <a
                 href={`https://twitter.com/${author.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <br /> <strong>{author.name}</strong> on Twitter
-              </a>
+              </a> */}
             </p>
             {commentsBlock}
           </div>
