@@ -67,6 +67,36 @@ gatsby develop
 
 ![](https://hbn-assets-blog.s3.amazonaws.com/sungkwang/images/Screen%20Shot%202020-01-22%20at%205.07.40%20PM.png)
 
+서버가 실행되면 두가지 URL 정보를 확인할 수 있다. 
+
+* http://localhost:8000/
+* http://localhost:8000/___graphql
+
+Gatsby는 내부적으로 [GraphQL](https://graphql.org/)를 사용하여 데이터를 가져오는데 Gatsby 자체적으로 GraphQL 에 Query를 할 수 있는 인터페이스를 제공하고 있다. GraphQL 인터페이스에서 query를 직접 작성해서 데이터를 가져오는 결과를 확인할 수 있어 이후에 React 로 컴포넌트를 만들 때나 Gatsby의 컴포넌트와 레이아웃을 수정할 수 있다.
+
+
+```graphql
+query MyQuery {
+  allMarkdownRemark(limit: 10) {
+    edges {
+      node {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          description
+          path
+        }
+      }
+    }
+  }
+}
+
+```
+
+![](https://hbn-assets-blog.s3.amazonaws.com/sungkwang/images/Screen%20Shot%202020-01-23%20at%203.09.51%20PM.png)
+
 ## gatsby-config.js 수정
 
 Gatsby starters 를 사용하여 생성된 프로젝트 안에 `gatsby-config.js` 파일이 있는데 이 파일은 어플리케이션 설정에 관련된 내용이 저장되어 있다. 기본적으로 만들어진 정보는 내가 서비스하려는 내용과 다르기 때문에 이 파일을 자신의 환경에 맞게 수정해야 한다.
@@ -253,4 +283,4 @@ Gatsby Starters 는 말 그래도 Gatsby를 시작할 때 빠르게 시작할 �
 * **How Gatsby Works with GitHub Pages**, https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages/
 * **gatsby-plugin-cname**, https://www.gatsbyjs.org/packages/gatsby-plugin-cname/
 * **Configuring a custom domain for your GitHub Pages site**, https://help.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site
-
+* **Introduction to GraphQL**, https://graphql.org/learn/
