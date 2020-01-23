@@ -153,7 +153,7 @@ class Sidebar extends React.Component {
 
 ![](https://hbn-assets-blog.s3.amazonaws.com/sungkwang/images/Screen%20Shot%202020-01-23%20at%201.53.46%20PM.png)
 
-## Github Repository 생성
+## GitHub Repository 생성
 
 Getsby를 사용하여 개인 사이트를 운영할 때 다양한 방법이 존재한다. 자신이 직접 서버를 구축하기도 하고 [Netlify](https://www.netlify.com/)를 사용하기도 한다. 기본적으로 [GitHub Pages](https://pages.github.com/)를 사용해서 블로그를 운영했기 때문에 Github Pages를 선택했다.
 
