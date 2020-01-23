@@ -104,6 +104,7 @@ module.exports = {
               }
             `,
             output: '/rss.xml',
+            title: "SungKwang's Blog RSS Feed"
           },
         ],
       },
