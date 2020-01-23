@@ -107,7 +107,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token operator">...</span></code></pre></div>
 <p><code class="language-text">gatsby develop</code> 로 서버를 시작하면 소스코드를 고치고난 뒤 직접 서버를 재시작할 필요가 없다. 자동으로 코드를 반영해서 재시작하기 때문에 브라우저에서 바로 확인이 가능하다.</p>
 <p><img src="https://hbn-assets-blog.s3.amazonaws.com/sungkwang/images/Screen%20Shot%202020-01-23%20at%201.53.46%20PM.png"></p>
-<h2>Github Repository 생성</h2>
+<h2>GitHub Repository 생성</h2>
 <p>Getsby를 사용하여 개인 사이트를 운영할 때 다양한 방법이 존재한다. 자신이 직접 서버를 구축하기도 하고 <a href="https://www.netlify.com/">Netlify</a>를 사용하기도 한다. 기본적으로 <a href="https://pages.github.com/">GitHub Pages</a>를 사용해서 블로그를 운영했기 때문에 Github Pages를 선택했다.</p>
 <p>GitHub Pages로 사이트를 운영하기 위해서는 우선 GitHub 에 저장소를 만들어야 한다. 이 블로그는 <a href="https://github.com/sungkwangsong/blog.sungkwang.me/">https://github.com/sungkwangsong/blog.sungkwang.me/</a> 로 저장소를 만들었다.</p>
 <p>GitHub Pages는 <code class="language-text">gh-pages</code>라는 브랜치의 코드로 사이트가 운영되기 때문에 소스코드는 <code class="language-text">master</code> 에 존재하고 배포할 때만 <code class="language-text">gh-pages</code> 로 빌드된 파일을 올려야 한다. <strong>gatsby-v2-starter-lumen</strong>는 이미 <code class="language-text">package.json</code> 스크립트 안에 <code class="language-text">deploy</code> 코드가 포함되어 있기 때문에 특별히 다른 코드 작성을 하지 않고도 쉽게 <code class="language-text">npm run deploy</code> GitHub Pages 로 코드를 배포할 수 있다.</p>
