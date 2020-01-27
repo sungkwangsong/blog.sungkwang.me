@@ -35,13 +35,13 @@ module.exports = {
       github: 'sungkwangsong',
       rss: '/rss.xml',
       facebook: 'sungkwang.me',
-      facebookAppID: '2442879779086354'
+      facebookAppID: '2442879779086354',
     },
     ogLanguage: 'ko',
     siteLanguage: 'ko',
     headline: '',
     banner: '',
-    description: ''
+    description: '',
   },
   plugins: [
     'gatsby-plugin-cname',
