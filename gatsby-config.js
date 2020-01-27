@@ -28,7 +28,7 @@ module.exports = {
       // },
     ],
     author: {
-      name: 'SungKwang Song',
+      name: '송성광',
       email: 'tech@sungkwang.me',
       instagram: 'sungkwangsong',
       twitter: 'sungkwangsong',
