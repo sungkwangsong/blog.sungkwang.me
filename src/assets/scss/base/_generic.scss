@@ -107,11 +107,14 @@ strong {
 }
 
 ul {
-    list-style: square;
-    @include margin-bottom(1);
-    & li {
-        padding: 0 5px;
-        margin-bottom: 10px;
+    // list-style: square;
+    // @include margin-bottom(1);
+    // & li {
+    //     padding: 0 5px;
+    //     margin-bottom: 10px;
+    // }
+    & li p {
+        margin: 0;
     }
 }
 
