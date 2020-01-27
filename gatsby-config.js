@@ -18,10 +18,10 @@ module.exports = {
         label: 'Articles',
         path: '/',
       },
-      // {
-      //   label: 'About me',
-      //   path: '/about/',
-      // },
+      {
+        label: 'About me',
+        path: '/about/',
+      },
       // {
       //   label: 'Contact me',
       //   path: '/contact/',
@@ -104,7 +104,7 @@ module.exports = {
               }
             `,
             output: '/rss.xml',
-            title: "SungKwang's Blog RSS Feed"
+            title: "SungKwang's Blog RSS Feed",
           },
         ],
       },
