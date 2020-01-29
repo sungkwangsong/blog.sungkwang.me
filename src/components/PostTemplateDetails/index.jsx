@@ -82,7 +82,7 @@ class PostTemplateDetails extends React.Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <br /> Discuss on Twitter
+                <br /> Twitter에 질문 및 의견 남기기
               </a>
 
               {/* <a

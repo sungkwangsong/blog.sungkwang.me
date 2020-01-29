@@ -18,30 +18,30 @@ module.exports = {
         label: 'Articles',
         path: '/',
       },
-      // {
-      //   label: 'About me',
-      //   path: '/about/',
-      // },
+      {
+        label: 'About me',
+        path: '/about/',
+      },
       // {
       //   label: 'Contact me',
       //   path: '/contact/',
       // },
     ],
     author: {
-      name: 'SungKwang Song',
+      name: '송성광',
       email: 'tech@sungkwang.me',
       instagram: 'sungkwangsong',
       twitter: 'sungkwangsong',
       github: 'sungkwangsong',
       rss: '/rss.xml',
       facebook: 'sungkwang.me',
-      facebookAppID: '2442879779086354'
+      facebookAppID: '2442879779086354',
     },
     ogLanguage: 'ko',
     siteLanguage: 'ko',
     headline: '',
     banner: '',
-    description: ''
+    description: '',
   },
   plugins: [
     'gatsby-plugin-cname',
@@ -53,116 +53,62 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-feed-generator',
+      resolve: 'gatsby-plugin-feed',
       options: {
-      generator: `GatsbyJS`,
-      rss: true, // Set to true to enable rss generation
-      json: true, // Set to true to enable json feed generation
-      siteQuery: `
-        {
-          site {
-            siteMetadata {
-              title
-              description: subtitle
-              siteUrl
-              author
+        query: `
+          {
+            site {
+              siteMetadata {
+                url
+                title
+                description: subtitle
+              }
             }
           }
-        }
-      `,
-      feeds: [
-        {
-          name: 'feed', // This determines the name of your feed file => feed.json & feed.xml
-          query: `
+        `,
+        feeds: [
           {
-            allMarkdownRemark(
-              sort: {order: DESC, fields: [frontmatter___date]},
-              limit: 100,
-              ) {
-              edges {
-                node {
-                  html
-                  frontmatter {
-                    date
-                    path
-                    title
+            serialize: ({ query: { site, allMarkdownRemark } }) =>
+              allMarkdownRemark.edges.map(edge =>
+                Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.frontmatter.description,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.url + edge.node.fields.slug,
+                  guid: site.siteMetadata.url + edge.node.fields.slug,
+                  custom_elements: [{ 'content:encoded': edge.node.html }],
+                })
+              ),
+            query: `
+              {
+                allMarkdownRemark(
+                  limit: 1000,
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: { frontmatter: { layout: { eq: "post" }, draft: { ne: true } } }
+                ) {
+                  edges {
+                    node {
+                      html
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        title
+                        date
+                        layout
+                        draft
+                        description
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-          `,
-          normalize: ({ query: { site, allMarkdownRemark } }) => {
-            return allMarkdownRemark.edges.map(edge => {
-              return {
-                title: edge.node.frontmatter.title,
-                date: edge.node.frontmatter.date,
-                url: site.siteMetadata.siteUrl + edge.node.frontmatter.path,
-                html: edge.node.html,
-              }
-            })
+            `,
+            output: '/rss.xml',
+            title: "SungKwang's Blog RSS Feed",
           },
-        },
-      ],
+        ],
+      },
     },
-  },
-    // {
-    //   resolve: 'gatsby-plugin-feed',
-    //   options: {
-    //     query: `
-    //       {
-    //         site {
-    //           siteMetadata {
-    //             url
-    //             title
-    //             description: subtitle
-    //           }
-    //         }
-    //       }
-    //     `,
-    //     feeds: [
-    //       {
-    //         serialize: ({ query: { site, allMarkdownRemark } }) =>
-    //           allMarkdownRemark.edges.map(edge =>
-    //             Object.assign({}, edge.node.frontmatter, {
-    //               description: edge.node.frontmatter.description,
-    //               date: edge.node.frontmatter.date,
-    //               url: site.siteMetadata.url + edge.node.fields.slug,
-    //               guid: site.siteMetadata.url + edge.node.fields.slug,
-    //               custom_elements: [{ 'content:encoded': edge.node.html }],
-    //             })
-    //           ),
-    //         query: `
-    //           {
-    //             allMarkdownRemark(
-    //               limit: 1000,
-    //               sort: { order: DESC, fields: [frontmatter___date] },
-    //               filter: { frontmatter: { layout: { eq: "post" }, draft: { ne: true } } }
-    //             ) {
-    //               edges {
-    //                 node {
-    //                   html
-    //                   fields {
-    //                     slug
-    //                   }
-    //                   frontmatter {
-    //                     title
-    //                     date
-    //                     layout
-    //                     draft
-    //                     description
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         `,
-    //         output: '/rss.xml',
-    //         title: "SungKwang's Blog RSS Feed"
-    //       },
-    //     ],
-    //   },
-    // },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
