@@ -1,185 +1,141 @@
-const lost = require('lost')
-const pxtorem = require('postcss-pxtorem')
+require(`dotenv`).config({
+  path: `.env`,
+})
 
-const url = 'https://blog.sungkwang.me'
+const siteMetadata = {
+  siteTitle: `SungKwang`,
+  siteTitleAlt: `SungKwang's Blog`,
+  siteHeadline: `SungKwang's Blog`,
+  siteUrl: `https://blog.sungkwang.me`,
+  siteDescription: `I'm a full stack developer`,
+  siteLanguage: `en`,
+  siteImage: `/banner.jpg`,
+  author: `@sungkwangsong`,
+  showLineNumbers: false,
+  siteLanguage: `KR`,
+  basePath: '/',
+  blogPath: '/articles',
+  tagsPath: '/tags',
+  navigation: [
+    {
+      title: `Articles`,
+      slug: `/articles`,
+    },
+    {
+      title: `About`,
+      slug: `/about`,
+    },
+  ],
+  externalLinks: [
+    {
+      name: `Twitter`,
+      url: `https://twitter.com/sungkwangsong/`,
+    },
+    {
+      name: `Instagram`,
+      url: `https://www.instagram.com/sungkwangsong/`,
+    },
+  ], 
+}
 
 module.exports = {
-  siteMetadata: {
-    url,
-    siteUrl: url,
-    title: "SungKwang's Blog",
-    subtitle:
-      "I'm a full stack web developer.",
-    copyright: 'SungKwang © All rights reserved.',
-    copyleft: 'with Gatsby and lumen starter',
-    disqusShortname: '',
-    menu: [
-      {
-        label: 'Articles',
-        path: '/',
-      },
-      {
-        label: 'About me',
-        path: '/about/',
-      },
-      // {
-      //   label: 'Contact me',
-      //   path: '/contact/',
-      // },
-    ],
-    author: {
-      name: '송성광',
-      email: 'tech@sungkwang.me',
-      instagram: 'sungkwangsong',
-      twitter: 'sungkwangsong',
-      github: 'sungkwangsong',
-      rss: '/rss.xml',
-      facebook: 'sungkwang.me',
-      facebookAppID: '2442879779086354',
-    },
-    ogLanguage: 'ko',
-    siteLanguage: 'ko',
-    headline: '',
-    banner: '',
-    description: '',
-  },
+  siteMetadata: siteMetadata,
   plugins: [
-    'gatsby-plugin-cname',
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
-      },
+      resolve: `@lekoarts/gatsby-theme-minimal-blog`,
+      options: siteMetadata,
     },
     {
-      resolve: 'gatsby-plugin-feed',
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-120131969-3',
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `SungKwang's Blog`,
+        short_name: `SungKwang's Blog`,
+        description: ``,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#6B46C1`,
+        display: `standalone`,
+        icons: [
+          {
+            src: `/android-chrome-192x192.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `/android-chrome-512x512.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
+      },
+    },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify`,
+    // `gatsby-plugin-webpack-bundle-analyser-v2`,
+    {
+      resolve: `gatsby-plugin-feed`,
       options: {
         query: `
           {
             site {
               siteMetadata {
-                url
-                title
-                description: subtitle
+                siteTitle
+                siteDescription
+                siteUrl
               }
             }
           }
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) =>
-              allMarkdownRemark.edges.map(edge =>
-                Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.frontmatter.description,
-                  date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.url + edge.node.fields.slug,
-                  guid: site.siteMetadata.url + edge.node.fields.slug,
-                  custom_elements: [{ 'content:encoded': edge.node.html }],
+            serialize: ({ query: { site, allPost } }) => {
+              return allPost.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  title: node.title,
+                  description: node.excerpt,
+                  date: node.date,
+                  url: site.siteMetadata.siteUrl + node.slug,
+                  guid: site.siteMetadata.siteUrl + node.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
                 })
-              ),
+              })
+            },
             query: `
               {
-                allMarkdownRemark(
-                  limit: 1000,
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                  filter: { frontmatter: { layout: { eq: "post" }, draft: { ne: true } } }
-                ) {
-                  edges {
-                    node {
-                      html
-                      fields {
-                        slug
-                      }
-                      frontmatter {
-                        title
-                        date
-                        layout
-                        draft
-                        description
-                      }
-                    }
+              allPost(sort: { fields: date, order: DESC }) {
+                nodes {
+                  slug
+                  title
+                  date(formatString: "YYYY.MM.DD")
+                  excerpt
+                  description
+                  tags {
+                    name
+                    slug
                   }
                 }
               }
+            }
             `,
-            output: '/rss.xml',
+            output: "/feed.xml",
             title: "SungKwang's Blog RSS Feed",
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            match: "^/articles/",
+            // optional configuration to specify external rss feed, such as feedburner
+            // link: "https://feeds.feedburner.com/gatsby/blog",
           },
         ],
-      },
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 960,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-responsive-iframe',
-            options: { wrapperStyle: 'margin-bottom: 1.0725rem' },
-          },
-          'gatsby-remark-prismjs',
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
-        ],
-      },
-    },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: { trackingId: 'UA-120131969-3' },
-    },
-    {
-      resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: ['roboto:400,400i,500,700'],
-      },
-    },
-    'gatsby-plugin-sitemap',
-    'gatsby-plugin-offline',
-    'gatsby-plugin-catch-links',
-    'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-plugin-sass',
-      options: {
-        postCssPlugins: [
-          lost(),
-          pxtorem({
-            rootValue: 16,
-            unitPrecision: 5,
-            propList: [
-              'font',
-              'font-size',
-              'line-height',
-              'letter-spacing',
-              'margin',
-              'margin-top',
-              'margin-left',
-              'margin-bottom',
-              'margin-right',
-              'padding',
-              'padding-top',
-              'padding-left',
-              'padding-bottom',
-              'padding-right',
-              'border-radius',
-              'width',
-              'max-width',
-            ],
-            selectorBlackList: [],
-            replace: true,
-            mediaQuery: false,
-            minPixelValue: 0,
-          }),
-        ],
-        precision: 8,
-      },
-    },
-  ],
+      }
+    }
+  ] 
 }
